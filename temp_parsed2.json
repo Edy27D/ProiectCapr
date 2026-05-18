@@ -1,0 +1,37 @@
+[
+    {
+        "type": "label",
+        "name": "START"
+    },
+    {
+        "type": "instruction",
+        "opcode": "MOV",
+        "operands": [
+            "AX",
+            "10"
+        ]
+    },
+    {
+        "type": "instruction",
+        "opcode": "MOV",
+        "operands": [
+            "BX",
+            "20"
+        ]
+    },
+    {
+        "type": "instruction",
+        "opcode": "ADD",
+        "operands": [
+            "AX",
+            "(BX+20)"
+        ]
+    },
+    {
+        "type": "instruction",
+        "opcode": "JMP",
+        "operands": [
+            "START"
+        ]
+    }
+]

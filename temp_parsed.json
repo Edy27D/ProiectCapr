@@ -1,0 +1,31 @@
+[
+    {
+        "type": "instruction",
+        "opcode": "MOV",
+        "operands": [
+            "R1",
+            "5"
+        ]
+    },
+    {
+        "type": "instruction",
+        "opcode": "MOV",
+        "operands": [
+            "R2",
+            "10"
+        ]
+    },
+    {
+        "type": "instruction",
+        "opcode": "ADD",
+        "operands": [
+            "R1",
+            "R2"
+        ]
+    },
+    {
+        "type": "instruction",
+        "opcode": "HALT",
+        "operands": []
+    }
+]
