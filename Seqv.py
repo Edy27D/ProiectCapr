@@ -297,3 +297,34 @@ class Secventiator:
             r2 = f"R{i + 1}: 0x{self.R[i + 1]:04X}"
             print(f"{r1:<16} {r2}")
         print("-" * 34)
+
+    def step(self):
+        """Execută o singură microinstrucțiune și returnează starea magistralelor."""
+        if self.halted:
+            return {"status": "HALT"}
+
+        if self.MPC not in self.Micro_ROM:
+            self.halted = True
+            return {"status": "ERROR", "msg": f"Adresa MPC 0x{self.MPC:02X} nu există!"}
+
+        self.MIR = self.Micro_ROM[self.MPC]
+        mpc_curent = self.MPC
+
+        # --- EXECUȚIA HARDWARE ---
+        self._citeste_sbus()
+        self._citeste_dbus()
+        self._executa_alu()
+        self._scrie_rbus()
+        self._operatii_memorie()
+        self._operatii_diverse()
+        self._calculeaza_urmatorul_mpc()
+
+        return {
+            "status": "OK",
+            "mpc_executat": mpc_curent,
+            "sbus_sursa": self.MIR.get('SBUS', 'NONE'),
+            "dbus_dest": self.MIR.get('DBUS', 'NONE'),
+            "rbus_dest": self.MIR.get('RBUS', 'NONE'),
+            "alu_op": self.MIR.get('ALU', 'NONE'),
+            "mem_op": self.MIR.get('MEM', 'NONE')
+        }
